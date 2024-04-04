@@ -1,32 +1,62 @@
-﻿
-@model StreamingWeb.ViewModels.UserViewModel
+﻿@model StreamingWeb.ViewModels.UserViewModel
 
-@if (Model.Authentifie)
-{
-    <h3>
-        Vous êtes déjà authentifié avec le login :
-        @Model.User.Id
-    </h3>
-    @Html.ActionLink("Voulez-vous vous déconnecter ?", "Deconnexion")
-}
-else
-{
-    <p>
-        Veuillez vous authentifier :
-    </p>
-    using (Html.BeginForm())
-    {
-        <div>
-            @Html.LabelFor(m => m.User.Id)
-            @Html.TextBoxFor(m => m.User.Id)
-            @Html.ValidationMessageFor(m => m.User.Id)
-        </div>
-        <div>
-            @Html.LabelFor(m => m.User.Password)
-            @Html.PasswordFor(m => m.User.Password)
-            @Html.ValidationMessageFor(m => m.User.Password)
-        </div>
-        <input type="submit" value="Se connecter" action="Index">
-        <br />
+<style>
+    .login-container {
+        width: 300px; /* Largeur du conteneur de connexion */
+        margin: 0 auto; /* Centrage horizontal du conteneur */
+        padding: 20px; /* Espacement intérieur du conteneur */
+        background-color: rgba(255, 255, 255, 0.8); /* Couleur de fond du conteneur avec opacité */
+        border-radius: 10px; /* Bordure arrondie du conteneur */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Ombre portée du conteneur */
     }
-}
+
+    .login-title {
+        text-align: center; /* Centrage du titre */
+        margin-bottom: 20px; /* Espacement inférieur du titre */
+    }
+
+    .login-form input[type="text"],
+    .login-form input[type="password"] {
+        width: 100%; /* Largeur maximale des champs de saisie */
+        padding: 10px; /* Espacement intérieur des champs de saisie */
+        margin-bottom: 10px; /* Espacement inférieur des champs de saisie */
+        border: 1px solid #ccc; /* Bordure des champs de saisie */
+        border-radius: 5px; /* Bordure arrondie des champs de saisie */
+    }
+
+    .login-form input[type="submit"] {
+        width: 100%; /* Largeur maximale du bouton de soumission */
+        padding: 10px; /* Espacement intérieur du bouton de soumission */
+        background-color: #007bff; /* Couleur de fond du bouton de soumission */
+        color: #fff; /* Couleur du texte du bouton de soumission */
+        border: none; /* Suppression de la bordure du bouton de soumission */
+        border-radius: 5px; /* Bordure arrondie du bouton de soumission */
+        cursor: pointer; /* Curseur de type pointer au survol du bouton de soumission */
+    }
+
+        .login-form input[type="submit"]:hover {
+            background-color: #0056b3; /* Couleur de fond du bouton de soumission au survol */
+        }
+</style>
+
+<div class="login-container">
+    <h2 class="login-title">Authentification</h2>
+
+    @if (Model.Authentifie)
+    {
+        <h3>Vous êtes déjà authentifié avec le login : @Model.User.Id</h3>
+        @Html.ActionLink("Voulez-vous vous déconnecter ?", "Deconnexion")
+    }
+    else
+    {
+        <p>Veuillez vous authentifier :</p>
+        @using (Html.BeginForm())
+        {
+            <div class="login-form">
+                <input type="text" placeholder="Identifiant" name="User.Id">
+                <input type="password" placeholder="Mot de passe" name="User.Password">
+                <input type="submit" value="Se connecter">
+            </div>
+        }
+    }
+</div>

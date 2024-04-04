@@ -1,6 +1,7 @@
 ﻿using StreamingWeb.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using StreamingWeb.ControllerAPI;
 
 namespace StreamingWeb.Controllers
 {
@@ -15,7 +16,9 @@ namespace StreamingWeb.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var animes = API.Instance.GetAnimesAsync().Result;
+
+            return View(animes);
         }
 
         public IActionResult Privacy()

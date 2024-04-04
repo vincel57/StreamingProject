@@ -1,9 +1,106 @@
-﻿@{
+﻿@model IEnumerable<StreamingAPI.Models.Anime>
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<style>
+    body {
+        background-image: url('https://img.freepik.com/photos-gratuite/paysage-urbain-cyberpunk_23-2150712616.jpg');
+        background-size: cover;
+        background-position: center;
+        color: #fff;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    .welcome-message {
+        text-align: center;
+        margin-top: 100px;
+    }
+
+        .welcome-message h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .welcome-message p {
+            font-size: 1.5rem;
+            line-height: 1.5;
+        }
+
+    .anime-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 50px 20px;
+    }
+
+    .anime-card {
+        width: 300px;
+        margin: 20px;
+        padding: 20px;
+        background-color: rgba(0, 0, 0, 0.7);
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        transition: transform 0.3s ease;
+    }
+
+        .anime-card:hover {
+            transform: translateY(-10px);
+        }
+
+    .anime-image {
+        width: 100%;
+        height: 200px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        object-fit: cover;
+    }
+
+    h3 {
+        margin-bottom: 10px;
+        font-size: 1.5rem;
+    }
+
+    p {
+        font-size: 1rem;
+        line-height: 1.5;
+        margin-bottom: 20px;
+    }
+
+    a {
+        color: #ff5733;
+        text-decoration: none;
+        font-weight: bold;
+        border: 2px solid #ff5733;
+        padding: 10px 20px;
+        border-radius: 25px;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+        a:hover {
+            background-color: #ff5733;
+            color: #fff;
+        }
+</style>
+
+<div class="welcome-message">
+    <h1>Bienvenue sur notre site de streaming d'animes</h1>
+    <p>Découvrez notre gamme d'animes et plongez dans un monde d'aventure et d'émotion.</p>
+    <p>Apprenez-en plus sur <a href="https://docs.microsoft.com/aspnet/core">la création d'applications Web avec ASP.NET Core</a>.</p>
 </div>
-  
+
+<div class="anime-container">
+    @foreach (var item in Model)
+    {
+        <div class="anime-card">
+            <img src="@item.Link_image" alt="@item.Name" class="anime-image">
+            <h3>@item.Name</h3>
+            <p>@item.Description</p>
+            <a href="@item.Link_video">Watch Video</a>
+        </div>
+    }
+</div>

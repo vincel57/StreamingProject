@@ -1,0 +1,31 @@
+﻿@model StreamingWeb.ViewModels.UserViewModel
+
+@if (Model.Authentifie)
+{
+    <h3>
+        Vous êtes déjà authentifié avec le login :
+        @Model.Admin.Id
+    </h3>
+    @Html.ActionLink("Voulez-vous vous déconnecter ?", "Deconnexion")
+}
+else
+{
+    <p>
+        Veuillez vous authentifier :
+    </p>
+    using (Html.BeginForm())
+    {
+        <div>
+            @Html.LabelFor(m => m.Admin.Id)
+            @Html.TextBoxFor(m => m.Admin.Id)
+            @Html.ValidationMessageFor(m => m.Admin.Id)
+        </div>
+        <div>
+            @Html.LabelFor(m => m.Admin.password)
+            @Html.PasswordFor(m => m.Admin.password)
+            @Html.ValidationMessageFor(m => m.Admin.password)
+        </div>
+        <input type="submit" value="Se connecter" action="Index">
+        <br />
+    }
+}

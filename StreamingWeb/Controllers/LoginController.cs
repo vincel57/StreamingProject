@@ -43,6 +43,21 @@ namespace StreamingWeb.Controllers
             return View(viewModel);
         }
 
+       /* [HttpPost]
+        public ActionResult IndexAdmin(UserViewModel viewModel)
+        {
+
+           
+            Admin admin = API.Instance.GetAdmin(viewModel.Admin.Id).Result;
+           
+             if(admin != null)
+              {
+                  return Redirect("Admins/Index");
+              }
+            ModelState.AddModelError("User.Login", "Login et/ou mot de passe incorrect(s)");
+            return View(viewModel);
+        }*/
+
         public ActionResult Deconnexion()
         {
             return Redirect("/");
